@@ -183,11 +183,6 @@
     "@jsonjoy.com/buffers" "^1.0.0"
     "@jsonjoy.com/codegen" "^1.0.0"
 
-"@kubevirt-ui/kubevirt-api@^1.4.0":
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/@kubevirt-ui/kubevirt-api/-/kubevirt-api-1.4.2.tgz#ee55fdeabd5ffee356337516b0971158b8b7d02d"
-  integrity sha512-7t15bvfqYTG+bVrVx8YhpRRVcnqXutRI9+OfUdTm/t9X9HDn9Mnm4ID26I+sVW6ML5SfF533mNugi8FuN2/L2g==
-
 "@leichtgewicht/ip-codec@^2.0.1":
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.5.tgz#4fc56c15c580b9adb7dc3c333a134e540b44bfb1"
@@ -297,7 +292,7 @@
     react-dropzone "^14.3.5"
     tslib "^2.8.1"
 
-"@patternfly/react-icons@^6.0.0", "@patternfly/react-icons@^6.4.0":
+"@patternfly/react-icons@^6.0.0", "@patternfly/react-icons@^6.2.2", "@patternfly/react-icons@^6.4.0":
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/@patternfly/react-icons/-/react-icons-6.4.0.tgz#563d5a51e76084dea8c752b587fc479dfe10fc31"
   integrity sha512-SPjzatm73NUYv/BL6A/cjRA5sFQ15NkiyPAcT8gmklI7HY+ptd6/eg49uBDFmxTQcSwbb5ISW/R6wwCQBY2M+Q==

@@ -56,6 +56,10 @@ const config: Configuration = {
         },
       },
       {
+        resourceQuery: /raw/,
+        type: 'asset/source',
+      },
+      {
         test: /\.(m?js)$/,
         resolve: {
           fullySpecified: false,

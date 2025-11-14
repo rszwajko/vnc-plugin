@@ -3,7 +3,7 @@ import type {
   EncodedExtension,
 } from '@openshift-console/dynamic-plugin-sdk-webpack';
 
-import { ActionProvider } from '@openshift-console/dynamic-plugin-sdk';
+import { ResourceActionProvider } from '@openshift-console/dynamic-plugin-sdk';
 
 export const exposedModules: ConsolePluginBuildMetadata['exposedModules'] = {
   useVmActions: './useVmActions',
@@ -12,23 +12,31 @@ export const exposedModules: ConsolePluginBuildMetadata['exposedModules'] = {
 
 const extensions: EncodedExtension[] = [
   {
-    type: 'console.action/provider',
+    type: 'console.action/resource-provider',
     properties: {
-      contextId: 'kubevirt.io~v1~VirtualMachineInstance',
+      model: {
+        group: 'kubevirt.io',
+        version: 'v1',
+        kind: 'VirtualMachineInstance',
+      },
       provider: {
         $codeRef: 'useVmiActions',
       },
     },
-  } as EncodedExtension<ActionProvider>,
+  } as EncodedExtension<ResourceActionProvider>,
   {
-    type: 'console.action/provider',
+    type: 'console.action/resource-provider',
     properties: {
-      contextId: 'kubevirt.io~v1~VirtualMachine',
+      model: {
+        group: 'kubevirt.io',
+        version: 'v1',
+        kind: 'VirtualMachine',
+      },
       provider: {
         $codeRef: 'useVmActions',
       },
     },
-  } as EncodedExtension<ActionProvider>,
+  } as EncodedExtension<ResourceActionProvider>,
 ];
 
 export default extensions;

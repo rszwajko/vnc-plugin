@@ -3,6 +3,7 @@ import {
   K8sModel,
   K8sVerb,
 } from '@openshift-console/dynamic-plugin-sdk';
+import vncPage from './vncPage';
 
 /**
  * function to build AccessReviewResourceAttributes from a resource
@@ -35,4 +36,31 @@ export const asAccessReview = (
     subresource,
     verb,
   };
+};
+
+export const isConnectionEncrypted = () => window.location.protocol === 'https:';
+export const SECURE = '443';
+export const INSECURE = '80';
+
+export const injectIntoHtml = (page: string, data: { defaults: object; mandatory: object }) =>
+  page.replace(
+    '<head>',
+    `
+    <head>
+    <script id="data" type="application/json">
+    ${JSON.stringify(data)}
+    </script>
+    `,
+  );
+
+export const toObjectUrl = ({ name, namespace }: { name: string; namespace: string }) => {
+  const path = `api/kubernetes/apis/subresources.kubevirt.io/v1/namespaces/${namespace}/virtualmachineinstances/${name}/vnc`;
+  const host = window.location.hostname;
+  const port = window.location.port || (isConnectionEncrypted() ? SECURE : INSECURE);
+  const objectUrl = URL.createObjectURL(
+    new Blob([injectIntoHtml(vncPage, { defaults: { port }, mandatory: { host, path } })], {
+      type: 'text/html',
+    }),
+  );
+  return objectUrl;
 };
