@@ -3,7 +3,7 @@ import {
   K8sModel,
   K8sVerb,
 } from '@openshift-console/dynamic-plugin-sdk';
-import vncPage from './vncPage';
+import vncPage from '@rszwajko/standalone';
 
 /**
  * function to build AccessReviewResourceAttributes from a resource
@@ -47,7 +47,7 @@ export const injectIntoHtml = (page: string, data: { defaults: object; mandatory
     '<head>',
     `
     <head>
-    <script id="data" type="application/json">
+    <script id="injectedData" type="application/json">
     ${JSON.stringify(data)}
     </script>
     `,
