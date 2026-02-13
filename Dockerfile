@@ -6,8 +6,9 @@ COPY . /opt/app-root/src
 WORKDIR /opt/app-root/src
 ENV NODE_OPTIONS=--max-old-space-size=8192
 ENV HUSKY=0
+
 RUN npm config set fetch-timeout 1200000
-RUN npm ci --ignore-scripts --legacy-peer-deps
+RUN --mount=type=secret,id=github_token,env=GITHUB_READ_PACKAGES_TOKEN npm ci --ignore-scripts --legacy-peer-deps
 RUN npm run build
 
 # Image info: https://catalog.redhat.com/en/software/containers/ubi9/nginx-124/657b066b6c1bc124a1d7ff39
