@@ -1,7 +1,7 @@
 {
   "name": "vnc-plugin",
   "displayName": "VNC plugin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "VNC plugin",
   "private": true,
   "license": "Apache-2.0",
