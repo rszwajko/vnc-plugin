@@ -1,14 +1,18 @@
-FROM registry.access.redhat.com/ubi9/nodejs-18:latest AS build
+# Image info: https://catalog.redhat.com/en/software/containers/ubi9/nodejs-22/66431d1785c5c3a31edd24f1
+FROM registry.access.redhat.com/ubi9/nodejs-22:9.7-1766414965 AS builder
 USER root
-RUN command -v yarn || npm i -g yarn
 
-ADD . /usr/src/app
-WORKDIR /usr/src/app
-RUN yarn install && yarn build
+COPY . /opt/app-root/src
+WORKDIR /opt/app-root/src
+ENV NODE_OPTIONS=--max-old-space-size=8192
+ENV HUSKY=0
+RUN npm config set fetch-timeout 1200000
+RUN npm ci --ignore-scripts
+RUN npm run build
 
-FROM registry.access.redhat.com/ubi9/nginx-120:latest
+# Image info: https://catalog.redhat.com/en/software/containers/ubi9/nginx-124/657b066b6c1bc124a1d7ff39
+FROM registry.access.redhat.com/ubi9/nginx-124:9.7-1767846424
 
-COPY --from=build /usr/src/app/dist /usr/share/nginx/html
+COPY --from=builder /opt/app-root/src/dist /usr/share/nginx/html
 USER 1001
-
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+CMD /usr/libexec/s2i/run
