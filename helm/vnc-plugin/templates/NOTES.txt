@@ -1,0 +1,32 @@
+VNC Plugin has been deployed successfully.
+
+PLUGIN NAME:  {{ template "openshift-console-plugin.name" . }}
+NAMESPACE:    {{ .Release.Namespace }}
+IMAGE:        {{ .Values.plugin.image }}
+REPLICAS:     {{ .Values.plugin.replicas }}
+PORT:         {{ .Values.plugin.port }} (HTTPS – OpenShift service-serving CA)
+
+{{- if .Values.plugin.jobs.patchConsoles.enabled }}
+
+The post-install Job "{{ template "openshift-console-plugin.patcherName" . }}" will
+automatically enable the plugin in consoles.operator.openshift.io/cluster.
+
+{{- else }}
+
+To manually activate the plugin in the OpenShift web console run:
+
+  oc patch consoles.operator.openshift.io cluster \
+    --type=merge \
+    --patch='{"spec":{"plugins":["{{ template "openshift-console-plugin.name" . }}"]}}'
+
+Or via the OpenShift UI:
+  Administration → Cluster Settings → Configuration →
+  Console (operator.openshift.io) → Console plugins tab → Enable "{{ .Values.plugin.description }}"
+{{- end }}
+
+To verify the deployment:
+
+  kubectl rollout status deployment/{{ template "openshift-console-plugin.name" . }} \
+    -n {{ .Release.Namespace }}
+
+  kubectl get consoleplugin {{ template "openshift-console-plugin.name" . }}
