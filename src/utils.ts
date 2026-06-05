@@ -58,9 +58,17 @@ export const toObjectUrl = ({ name, namespace }: { name: string; namespace: stri
   const host = window.location.hostname;
   const port = window.location.port || (isConnectionEncrypted() ? SECURE : INSECURE);
   const objectUrl = URL.createObjectURL(
-    new Blob([injectIntoHtml(vncPage, { defaults: { port }, mandatory: { host, path } })], {
-      type: 'text/html',
-    }),
+    new Blob(
+      [
+        injectIntoHtml(vncPage, {
+          defaults: { port },
+          mandatory: { host, path, encrypt: isConnectionEncrypted() },
+        }),
+      ],
+      {
+        type: 'text/html',
+      },
+    ),
   );
   return objectUrl;
 };
