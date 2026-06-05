@@ -16,7 +16,7 @@
     "build-dev": "npm run clean && npm run webpack",
     "start": "npm run webpack serve",
     "start-console": "./start-console.sh",
-    "lint": "eslint src",
+    "lint": "eslint src && prettier --check .",
     "webpack": "ts-node -O '{\"module\":\"commonjs\"}' node_modules/.bin/webpack"
   },
   "dependencies": {
