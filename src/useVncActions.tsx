@@ -9,11 +9,18 @@ const useVncActions = ({
   name,
   namespace,
   cluster,
+  userName,
+  userPass,
 }: {
-  name: string;
-  namespace: string;
+  name?: string;
+  namespace?: string;
   cluster?: string;
+  userName?: string;
+  userPass?: string;
 }) => {
+  if (!name || !namespace) {
+    return [];
+  }
   const actions: Action[] = useMemo(
     () => [
       {
@@ -22,7 +29,7 @@ const useVncActions = ({
           'vm-action-open-console', // id used by VM action
           'open-console', // id used by VMI action
         ],
-        cta: () => window.open(toObjectUrl({ name, namespace })),
+        cta: () => window.open(toObjectUrl({ name, namespace, userName, userPass })),
         label: 'Open noVNC',
         icon: <ExternalLinkAltIcon />,
         // multi-cluster is not supported

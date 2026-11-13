@@ -23,9 +23,9 @@ export const asAccessReview = (
   obj: { name: string; namespace: string; cluster?: string },
   verb: K8sVerb,
   subresource?: string,
-): AccessReviewResourceAttributes & { cluster?: string } => {
+): (AccessReviewResourceAttributes & { cluster?: string }) | undefined => {
   if (!obj) {
-    return null;
+    return undefined;
   }
   return {
     cluster: obj?.cluster,
@@ -53,7 +53,17 @@ export const injectIntoHtml = (page: string, data: { defaults: object; mandatory
     `,
   );
 
-export const toObjectUrl = ({ name, namespace }: { name: string; namespace: string }) => {
+export const toObjectUrl = ({
+  name,
+  namespace,
+  userName,
+  userPass,
+}: {
+  name: string;
+  namespace: string;
+  userName?: string;
+  userPass?: string;
+}) => {
   const path = `api/kubernetes/apis/subresources.kubevirt.io/v1/namespaces/${namespace}/virtualmachineinstances/${name}/vnc`;
   const host = window.location.hostname;
   const port = window.location.port || (isConnectionEncrypted() ? SECURE : INSECURE);
@@ -61,7 +71,11 @@ export const toObjectUrl = ({ name, namespace }: { name: string; namespace: stri
     new Blob(
       [
         injectIntoHtml(vncPage, {
-          defaults: { port },
+          defaults: {
+            port,
+            cloud_init_credentials_user_name: userName,
+            cloud_init_credentials_user_pass: userPass,
+          },
           mandatory: { host, path, encrypt: isConnectionEncrypted() },
         }),
       ],

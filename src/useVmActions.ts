@@ -1,12 +1,16 @@
 import { Action, type ExtensionHook } from '@openshift-console/dynamic-plugin-sdk';
 
+import { getCloudInitCredentials } from './cloud-init';
 import { V1VirtualMachine } from './types';
 import useVncActions from './useVncActions';
 
 const useVmActions: ExtensionHook<Action[], V1VirtualMachine> = (vm) => {
   const { name, namespace } = vm?.metadata ?? {};
   const cluster = vm?.cluster;
-  const actions = useVncActions({ name, namespace, cluster });
+  const { users } = getCloudInitCredentials(vm);
+  const userName = users?.[0]?.name;
+  const userPass = users?.[0]?.password;
+  const actions = useVncActions({ name, namespace, cluster, userName, userPass });
   return [actions, true, null];
 };
 
