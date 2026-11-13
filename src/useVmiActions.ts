@@ -1,4 +1,5 @@
-import { type ExtensionHook, Action } from '@openshift-console/dynamic-plugin-sdk';
+import { Action, type ExtensionHook } from '@openshift-console/dynamic-plugin-sdk';
+
 import { V1VirtualMachineInstance } from './types';
 import useVncActions from './useVncActions';
 

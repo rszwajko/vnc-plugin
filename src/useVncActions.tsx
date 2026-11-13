@@ -1,9 +1,9 @@
-import React from 'react';
 import { Action } from '@openshift-console/dynamic-plugin-sdk';
-import { useMemo } from 'react';
-import { asAccessReview, toObjectUrl } from './utils';
-import { VirtualMachineInstanceModel } from './types';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
+import React, { useMemo } from 'react';
+
+import { VirtualMachineInstanceModel } from './types';
+import { asAccessReview, toObjectUrl } from './utils';
 
 const useVncActions = ({
   name,

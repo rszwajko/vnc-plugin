@@ -1,9 +1,8 @@
+import { ResourceActionProvider } from '@openshift-console/dynamic-plugin-sdk';
 import type {
   ConsolePluginBuildMetadata,
   EncodedExtension,
 } from '@openshift-console/dynamic-plugin-sdk-webpack';
-
-import { ResourceActionProvider } from '@openshift-console/dynamic-plugin-sdk';
 
 export const exposedModules: ConsolePluginBuildMetadata['exposedModules'] = {
   useVmActions: './useVmActions',

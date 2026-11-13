@@ -1,7 +1,7 @@
-import { exposedModules } from './plugin-extensions';
-
 import { ConsolePluginBuildMetadata } from '@openshift-console/dynamic-plugin-sdk-webpack';
+
 import pkg from './package.json';
+import { exposedModules } from './plugin-extensions';
 
 const pluginMetadata: ConsolePluginBuildMetadata = {
   name: pkg.name,

@@ -1,12 +1,7 @@
-/* eslint-env node */
-
+import { ConsoleRemotePlugin } from '@openshift-console/dynamic-plugin-sdk-webpack';
 import * as path from 'path';
 import { Configuration as WebpackConfiguration } from 'webpack';
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
-
-import CopyWebpackPlugin from 'copy-webpack-plugin';
-
-import { ConsoleRemotePlugin } from '@openshift-console/dynamic-plugin-sdk-webpack';
 
 import extensions from './plugin-extensions';
 import pluginMetadata from './plugin-metadata';
@@ -26,6 +21,7 @@ const config: Configuration = {
     path: path.resolve(__dirname, 'dist'),
     filename: isProd ? '[name]-bundle-[hash].min.js' : '[name]-bundle.js',
     chunkFilename: isProd ? '[name]-chunk-[chunkhash].min.js' : '[name]-chunk.js',
+    copy: [{ from: '../locales', to: 'locales' }],
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
@@ -85,9 +81,6 @@ const config: Configuration = {
     new ConsoleRemotePlugin({
       extensions,
       pluginMetadata,
-    }),
-    new CopyWebpackPlugin({
-      patterns: [{ from: path.resolve(__dirname, 'locales'), to: 'locales' }],
     }),
   ],
   devtool: isProd ? false : 'source-map',

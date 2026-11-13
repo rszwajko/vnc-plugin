@@ -7,7 +7,7 @@ An OpenShift Console plugin that adds a VNC action via `console.action/*` extens
 ### OpenShift templates
 
 ```bash
-oc process -f deploymnet/oc-manifest.yaml \
+oc process -f deployment/oc-manifest.yaml \
   -p PLUGIN_NAME=vnc-plugin \
   -p NAMESPACE=vnc-plugin \
   -p IMAGE=quay.io/rszwajko/vnc-plugin:latest \
@@ -19,3 +19,4 @@ Enable the plugin:
 ```bash
 oc patch consoles.operator.openshift.io cluster \
   --patch '{ "spec": { "plugins": ["vnc-plugin"] } }' --type=merge
+```
