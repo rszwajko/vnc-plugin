@@ -1,7 +1,7 @@
 {
   "name": "vnc-plugin",
   "displayName": "VNC plugin",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "VNC plugin",
   "private": true,
   "license": "Apache-2.0",
@@ -31,7 +31,7 @@
     "@openshift-console/dynamic-plugin-sdk": "4.23.0",
     "@openshift-console/dynamic-plugin-sdk-internal": "4.23.0",
     "@openshift-console/dynamic-plugin-sdk-webpack": "4.23.0",
-    "@types/node": "^22",
+    "@types/node": "22.20.5",
     "@types/react": "18.3.27",
     "@types/react-dom": "18.3.7",
     "css-loader": "6.11.0",
@@ -51,6 +51,7 @@
     "typescript": "5.9.3",
     "typescript-eslint": "8.72.1",
     "webpack": "5.112.2",
+    "webpack-cli": "7.3.1",
     "webpack-dev-server": "6.1.0"
   },
   "engines": {
